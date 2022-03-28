@@ -3,6 +3,7 @@ package cm;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.math.*;
 
 public class Rate {
     private CarParkKind kind;
@@ -100,8 +101,15 @@ public class Rate {
     public BigDecimal calculate(Period periodStay) {
         int normalRateHours = periodStay.occurences(normal);
         int reducedRateHours = periodStay.occurences(reduced);
-        return (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add(
+
+        BigDecimal cost = (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add(
                 this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
+
+        if (this.kind == CarParkKind.VISITOR) {
+            cost = visitorPrice(cost);
+        }
+
+        return cost;
     }
 
     public boolean checkPeriodsArray(ArrayList<Period> arrayList) {
@@ -114,4 +122,18 @@ public class Rate {
         }
         return check;
     }
+
+    public BigDecimal visitorPrice(BigDecimal cost) {
+
+        MathContext mc = new MathContext(2); // 2 precision
+
+        BigDecimal free = new BigDecimal(10);
+        BigDecimal discount = new BigDecimal(0.5);
+        BigDecimal newCost = (cost.subtract(free,mc));
+        newCost = newCost.multiply(discount,mc);
+
+        return newCost;
+    }
+
+
 }

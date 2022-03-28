@@ -102,17 +102,17 @@ public class Rate {
         int normalRateHours = periodStay.occurences(normal);
         int reducedRateHours = periodStay.occurences(reduced);
 
-        BigDecimal cost = (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add(
+        BigDecimal price = (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add(
                 this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
 
         if (this.kind == CarParkKind.VISITOR) {
-            cost = visitorPrice(cost);
+            price = visitorPrice(price);
         }
         else if (this.kind == CarParkKind.MANAGEMENT) {
-            cost = managementPrice(cost);
+            price = managementPrice(price);
         }
 
-        return cost;
+        return price;
     }
 
     public boolean checkPeriodsArray(ArrayList<Period> arrayList) {
@@ -126,28 +126,26 @@ public class Rate {
         return check;
     }
 
-    public BigDecimal visitorPrice(BigDecimal cost) {
+    public BigDecimal visitorPrice(BigDecimal price) {
 
         //https://www.tutorialspoint.com/java/math/bigdecimal_subtract_mc.htm
         MathContext mc = new MathContext(2); // 2 precision
 
-        BigDecimal free = new BigDecimal(10);
-        BigDecimal discount = new BigDecimal(0.5);
-        BigDecimal newCost = (cost.subtract(free,mc));
-        newCost = newCost.multiply(discount,mc);
+        BigDecimal freeFirstTen = new BigDecimal(10);
+        BigDecimal fiftyPercentReduction = new BigDecimal(0.5);
+        price = (price.subtract(freeFirstTen,mc));
+        price = price.multiply(fiftyPercentReduction,mc);
 
-        return newCost;
+        return price;
     }
 
-    public BigDecimal managementPrice(BigDecimal cost) {
+    public BigDecimal managementPrice(BigDecimal price) {
 
-        BigDecimal minimum = new BigDecimal(4);
-        if (cost.compareTo(minimum) < 4) {
-            cost = minimum;
+        BigDecimal minimumPay = new BigDecimal(4);
+        if (price.compareTo(minimumPay) < 0) {
+            price = minimumPay;
         }
-        return cost;
+        return price;
     }
-
-
 
 }

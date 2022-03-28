@@ -125,6 +125,7 @@ public class Rate {
 
     public BigDecimal visitorPrice(BigDecimal cost) {
 
+        //https://www.tutorialspoint.com/java/math/bigdecimal_subtract_mc.htm
         MathContext mc = new MathContext(2); // 2 precision
 
         BigDecimal free = new BigDecimal(10);

@@ -684,8 +684,6 @@ public class NgChiIeongTestTask3 {
      * STAFF: maximum payable is 16.00 per day
      */
 
-
-
     @Test
     public void specificationUpdateVisitor() throws IllegalArgumentException {
 
@@ -701,8 +699,5 @@ public class NgChiIeongTestTask3 {
         BigDecimal cost = rate.calculate(periodStay);
         assertEquals(new BigDecimal(12),cost);
     }
-
-
-
 
 }

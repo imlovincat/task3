@@ -617,4 +617,31 @@ public class NgChiIeongTestTask3 {
         assertEquals(new BigDecimal(1),cost);
     }
 
+    /**
+     * add new test to fix bug
+     * issue: one of the element is null in period array
+     * expert: throw illegalArgumentException
+     * actual throw nullPointerException
+     */
+
+    @Test
+    public void fixedPeriodArrayWithNull() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(1);
+            BigDecimal hourlyReducedRate = new BigDecimal(1);
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            Collections.addAll(normalPeriods, new Period(9, 13), new Period(14, 18));
+            Collections.addAll(reducedPeriods, null, new Period(13, 14), new Period(18, 22));
+            Rate rate = new Rate(kind, hourlyNormalRate, hourlyReducedRate, reducedPeriods, normalPeriods);
+            Period periodStay = new Period(9, 10);
+            BigDecimal cost = rate.calculate(periodStay);
+            fail();
+
+        } catch (IllegalArgumentException e) {
+            assertEquals("periods cannot be null", e.getMessage());
+        }
+    }
+
 }

@@ -673,4 +673,36 @@ public class NgChiIeongTestTask3 {
         }
     }
 
+    /**
+     * Specification Update
+     * Incremental Change:
+     * the Rate calculate method should take into account the kind of rate using the following reduction rates:
+     * VISITOR: first 10.00 is free, 50% reduction above that
+     * e.g total calculated cost was 15.00, after reduction only 2.50 needs to be paid (i.e. 50% of (15.00-10.00))
+     * MANAGEMENT: minimum payable is 4.00
+     * STUDENT: 25% reduction on any amount above 5.50
+     * STAFF: maximum payable is 16.00 per day
+     */
+
+
+
+    @Test
+    public void specificationUpdateVisitor() throws IllegalArgumentException {
+
+        CarParkKind kind = CarParkKind.VISITOR;
+        BigDecimal hourlyNormalRate = new BigDecimal(5);
+        BigDecimal hourlyReducedRate = new BigDecimal(3);
+        ArrayList<Period> normalPeriods = new ArrayList<Period>();
+        ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+        Collections.addAll(normalPeriods,new Period(9,13), new Period(14,18));
+        Collections.addAll(reducedPeriods,new Period(7,9),new Period(13,14),new Period(18,22));
+        Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+        Period periodStay = new Period(5,15);
+        BigDecimal cost = rate.calculate(periodStay);
+        assertEquals(new BigDecimal(12),cost);
+    }
+
+
+
+
 }

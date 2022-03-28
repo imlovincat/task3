@@ -15,7 +15,7 @@ public class Rate {
             , ArrayList<Period> normalPeriods) {
 
         //fixed error 2
-        if (reducedPeriods == null || normalPeriods == null || !(checkArrayList(reducedPeriods)) || !(checkArrayList(normalPeriods))) {
+        if (reducedPeriods == null || normalPeriods == null || !(checkPeriodsArray(reducedPeriods)) || !(checkPeriodsArray(normalPeriods))) {
             throw new IllegalArgumentException("periods cannot be null");
         }
 
@@ -99,7 +99,7 @@ public class Rate {
                 this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
     }
 
-    public boolean checkArrayList(ArrayList<Period> arrayList) {
+    public boolean checkPeriodsArray(ArrayList<Period> arrayList) {
         boolean check = true;
         for (int i = 0; i < arrayList.size(); i++) {
             if (arrayList.get(i) == null) {

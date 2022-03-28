@@ -667,7 +667,7 @@ public class NgChiIeongTestTask3 {
             fail();
 
         } catch (IllegalArgumentException e) {
-            assertEquals("CarParkKind cannot be null", e.getMessage());
+            assertEquals("kind cannot be null", e.getMessage());
         }
     }
 

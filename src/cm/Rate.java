@@ -108,6 +108,9 @@ public class Rate {
         if (this.kind == CarParkKind.VISITOR) {
             cost = visitorPrice(cost);
         }
+        else if (this.kind == CarParkKind.MANAGEMENT) {
+            cost = managementPrice(cost);
+        }
 
         return cost;
     }
@@ -135,6 +138,16 @@ public class Rate {
 
         return newCost;
     }
+
+    public BigDecimal managementPrice(BigDecimal cost) {
+
+        BigDecimal minimum = new BigDecimal(4);
+        if (cost.compareTo(minimum) < 4) {
+            cost = minimum;
+        }
+        return cost;
+    }
+
 
 
 }

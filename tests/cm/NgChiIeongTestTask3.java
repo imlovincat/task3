@@ -712,6 +712,7 @@ public class NgChiIeongTestTask3 {
         Collections.addAll(reducedPeriods,new Period(7,9),new Period(13,14),new Period(18,22));
         Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
         Period periodStay = new Period(7,8);
+        //Period periodStay = new Period(4,5);
         BigDecimal cost = rate.calculate(periodStay);
         assertEquals(new BigDecimal(4),cost);
     }

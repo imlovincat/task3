@@ -13,16 +13,19 @@ public class Rate {
 
     public Rate(CarParkKind kind, BigDecimal normalRate, BigDecimal reducedRate, ArrayList<Period> reducedPeriods
             , ArrayList<Period> normalPeriods) {
-        if (reducedPeriods == null || normalPeriods == null) {
+
+        //fixed error 2
+        if (reducedPeriods == null || normalPeriods == null || !(checkArrayList(reducedPeriods)) || !(checkArrayList(normalPeriods))) {
             throw new IllegalArgumentException("periods cannot be null");
         }
+
         if (normalRate == null || reducedRate == null) {
             throw new IllegalArgumentException("The rates cannot be null");
         }
         if (normalRate.compareTo(BigDecimal.ZERO) < 0 || reducedRate.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("A rate cannot be negative");
         }
-        //Fixed
+        //fixed error 1
         if (normalRate.compareTo(reducedRate) < 0) {
             throw new IllegalArgumentException("The normal rate cannot be less to the reduced rate");
         }
@@ -96,4 +99,14 @@ public class Rate {
                 this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
     }
 
+    public boolean checkArrayList(ArrayList<Period> arrayList) {
+        boolean check = true;
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i) == null) {
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
 }

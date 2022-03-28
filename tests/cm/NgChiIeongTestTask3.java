@@ -599,6 +599,7 @@ public class NgChiIeongTestTask3 {
      * issue: normalRate has to be greater or equal to the reducedRate
      * expert: pass
      * actual throw exception
+     * fixed
      */
 
     @Test
@@ -622,6 +623,7 @@ public class NgChiIeongTestTask3 {
      * issue: one of the element is null in period array
      * expert: throw illegalArgumentException
      * actual throw nullPointerException
+     * fixed
      */
 
     @Test
@@ -649,6 +651,7 @@ public class NgChiIeongTestTask3 {
      * issue: CarParkKind can not be null
      * expert: throw illegalArgumentException
      * actual passed
+     * fixed
      */
 
     @Test
@@ -665,7 +668,6 @@ public class NgChiIeongTestTask3 {
             Period periodStay = new Period(9, 10);
             BigDecimal cost = rate.calculate(periodStay);
             fail();
-
         } catch (IllegalArgumentException e) {
             assertEquals("kind cannot be null", e.getMessage());
         }

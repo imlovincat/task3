@@ -114,6 +114,9 @@ public class Rate {
         else if (this.kind == CarParkKind.STUDENT) {
             price = studentPrice(price);
         }
+        else if (this.kind == CarParkKind.STAFF) {
+            price = staffPrice(price);
+        }
 
         return price;
     }
@@ -161,5 +164,16 @@ public class Rate {
         return price;
     }
 
+    public BigDecimal staffPrice(BigDecimal price) {
+
+        //https://www.tutorialspoint.com/java/math/bigdecimal_subtract_mc.htm
+        MathContext mc = new MathContext(2); // 2 precision
+
+        BigDecimal maximumPay = new BigDecimal(16);
+        if (price.compareTo(maximumPay) > 0) {
+            price = maximumPay;
+        }
+        return price;
+    }
 
 }

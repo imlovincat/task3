@@ -117,6 +117,11 @@ public class Rate {
         return price;
     }
 
+    /**
+     * checks if one of period is null in the ArrayList
+     * @param arrayList the Periods list
+     * @return true if none of element is null in the list
+     */
     public boolean checkPeriodsArray(ArrayList<Period> arrayList) {
         boolean check = true;
         for (int i = 0; i < arrayList.size(); i++) {
@@ -128,6 +133,11 @@ public class Rate {
         return check;
     }
 
+    /**
+     * visitor reduction rates
+     * @param price the original price
+     * @return the price after reduction for visitor
+     */
     public BigDecimal visitorPrice(BigDecimal price) {
         //https://www.tutorialspoint.com/java/math/bigdecimal_subtract_mc.htm
         MathContext mc = new MathContext(2); // 2 precision
@@ -138,6 +148,11 @@ public class Rate {
         return price;
     }
 
+    /**
+     * management reduction rates
+     * @param price the original price
+     * @return the price after reduction for management
+     */
     public BigDecimal managementPrice(BigDecimal price) {
         BigDecimal minimumPay = new BigDecimal(4);
         if (price.compareTo(minimumPay) < 0) {
@@ -146,6 +161,11 @@ public class Rate {
         return price;
     }
 
+    /**
+     * student reduction rates
+     * @param price the original price
+     * @return the price after reduction for student
+     */
     public BigDecimal studentPrice(BigDecimal price) {
         MathContext mc = new MathContext(3); // 2 precision
         if (price.compareTo(new BigDecimal(5.5)) > 0) {
@@ -154,6 +174,11 @@ public class Rate {
         return price;
     }
 
+    /**
+     * staff reduction rates
+     * @param price the original price
+     * @return the price after reduction for staff
+     */
     public BigDecimal staffPrice(BigDecimal price) {
         BigDecimal maximumPay = new BigDecimal(16);
         if (price.compareTo(maximumPay) > 0) {

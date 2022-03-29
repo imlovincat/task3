@@ -14,17 +14,14 @@ public class Rate {
 
     public Rate(CarParkKind kind, BigDecimal normalRate, BigDecimal reducedRate, ArrayList<Period> reducedPeriods
             , ArrayList<Period> normalPeriods) {
-
         //fixed error 3
         if (kind == null) {
             throw new IllegalArgumentException("kind cannot be null");
         }
-
         //fixed error 2
         if (reducedPeriods == null || normalPeriods == null || !(checkPeriodsArray(reducedPeriods)) || !(checkPeriodsArray(normalPeriods))) {
             throw new IllegalArgumentException("periods cannot be null");
         }
-
         if (normalRate == null || reducedRate == null) {
             throw new IllegalArgumentException("The rates cannot be null");
         }
@@ -101,10 +98,10 @@ public class Rate {
     public BigDecimal calculate(Period periodStay) {
         int normalRateHours = periodStay.occurences(normal);
         int reducedRateHours = periodStay.occurences(reduced);
-
         BigDecimal price = (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add(
                 this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
 
+        //no "else if" for 100% branch coverage
         if (this.kind == CarParkKind.VISITOR) {
             price = visitorPrice(price);
         }
@@ -132,20 +129,16 @@ public class Rate {
     }
 
     public BigDecimal visitorPrice(BigDecimal price) {
-
         //https://www.tutorialspoint.com/java/math/bigdecimal_subtract_mc.htm
         MathContext mc = new MathContext(2); // 2 precision
-
         BigDecimal freeFirstTen = new BigDecimal(10);
         BigDecimal fiftyPercentReduction = new BigDecimal(0.5);
         price = (price.subtract(freeFirstTen,mc));
         price = price.multiply(fiftyPercentReduction,mc);
-
         return price;
     }
 
     public BigDecimal managementPrice(BigDecimal price) {
-
         BigDecimal minimumPay = new BigDecimal(4);
         if (price.compareTo(minimumPay) < 0) {
             price = minimumPay;
@@ -154,9 +147,7 @@ public class Rate {
     }
 
     public BigDecimal studentPrice(BigDecimal price) {
-
         MathContext mc = new MathContext(3); // 2 precision
-
         if (price.compareTo(new BigDecimal(5.5)) > 0) {
             return price.subtract(new BigDecimal(5.5)).multiply(new BigDecimal(0.75),mc).add(new BigDecimal(5.5));
         }
@@ -164,7 +155,6 @@ public class Rate {
     }
 
     public BigDecimal staffPrice(BigDecimal price) {
-
         BigDecimal maximumPay = new BigDecimal(16);
         if (price.compareTo(maximumPay) > 0) {
             price = maximumPay;

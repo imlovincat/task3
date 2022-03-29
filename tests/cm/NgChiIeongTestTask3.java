@@ -167,5 +167,326 @@ public class NgChiIeongTestTask3 {
         assertEquals(new BigDecimal(16),cost);
     }
 
+    /**
+     * reuse test case from task 2 to achieve 100% branch coverage
+     */
+
+    @Test
+    public void achieve100percentBranchCoverage1() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(5);
+            BigDecimal hourlyReducedRate = new BigDecimal(2);
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            ArrayList<Period> reducedPeriods = null;
+            Collections.addAll(normalPeriods,new Period(10,12),new Period(11,12), new Period(14,16));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            Period periodStay = new Period(17,21);
+            BigDecimal cost = rate.calculate(periodStay);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("periods cannot be null", e.getMessage());
+        }
+    }
+
+    @Test
+    public void achieve100percentBranchCoverage2() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(5);
+            BigDecimal hourlyReducedRate = new BigDecimal(2);
+            ArrayList<Period> normalPeriods = null;
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            Collections.addAll(reducedPeriods,new Period(9,11),new Period(8,13),new Period(10,14));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            Period periodStay = new Period(17,21);
+            BigDecimal cost = rate.calculate(periodStay);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("periods cannot be null", e.getMessage());
+        }
+    }
+
+    @Test
+    public void achieve100percentBranchCoverage3() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(5);
+            BigDecimal hourlyReducedRate = new BigDecimal(2);
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            Collections.addAll(normalPeriods,new Period(10,12),new Period(11,12), new Period(14,16));
+            Collections.addAll(reducedPeriods,null,new Period(8,13),new Period(10,14));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            Period periodStay = new Period(17,21);
+            BigDecimal cost = rate.calculate(periodStay);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("periods cannot be null", e.getMessage());
+        }
+    }
+
+    @Test
+    public void achieve100percentBranchCoverage4() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(5);
+            BigDecimal hourlyReducedRate = new BigDecimal(2);
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            Collections.addAll(normalPeriods,null,new Period(11,12), new Period(14,16));
+            Collections.addAll(reducedPeriods,new Period(9,11),new Period(8,13),new Period(10,14));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            Period periodStay = new Period(17,21);
+            BigDecimal cost = rate.calculate(periodStay);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("periods cannot be null", e.getMessage());
+        }
+    }
+
+    @Test
+    public void achieve100percentBranchCoverage5() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = null;
+            BigDecimal hourlyReducedRate = new BigDecimal(2);
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            Collections.addAll(normalPeriods,new Period(10,12),new Period(11,12), new Period(14,16));
+            Collections.addAll(reducedPeriods,new Period(9,11),new Period(8,13),new Period(10,14));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            Period periodStay = new Period(17,21);
+            BigDecimal cost = rate.calculate(periodStay);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("The rates cannot be null", e.getMessage());
+        }
+    }
+
+    @Test
+    public void achieve100percentBranchCoverage6() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(5);
+            BigDecimal hourlyReducedRate = null;
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            Collections.addAll(normalPeriods,new Period(10,12),new Period(11,12), new Period(14,16));
+            Collections.addAll(reducedPeriods,new Period(9,11),new Period(8,13),new Period(10,14));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            Period periodStay = new Period(17,21);
+            BigDecimal cost = rate.calculate(periodStay);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("The rates cannot be null", e.getMessage());
+        }
+    }
+
+    @Test
+    public void achieve100percentBranchCoverage7() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(-1);
+            BigDecimal hourlyReducedRate = new BigDecimal(2);
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            Collections.addAll(normalPeriods,new Period(10,12),new Period(11,12), new Period(14,16));
+            Collections.addAll(reducedPeriods,new Period(9,11),new Period(8,13),new Period(10,14));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            Period periodStay = new Period(17,21);
+            BigDecimal cost = rate.calculate(periodStay);
+            assertEquals(new BigDecimal(11),cost);
+        } catch (IllegalArgumentException e) {
+            assertEquals("A rate cannot be negative", e.getMessage());
+        }
+    }
+
+    @Test
+    public void achieve100percentBranchCoverage8() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(5);
+            BigDecimal hourlyReducedRate = new BigDecimal(-1);
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            Collections.addAll(normalPeriods,new Period(10,12),new Period(11,12), new Period(14,16));
+            Collections.addAll(reducedPeriods,new Period(9,11),new Period(8,13),new Period(10,14));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            Period periodStay = new Period(17,21);
+            BigDecimal cost = rate.calculate(periodStay);
+            assertEquals(new BigDecimal(11),cost);
+        } catch (IllegalArgumentException e) {
+            assertEquals("A rate cannot be negative", e.getMessage());
+        }
+    }
+
+    @Test
+    public void achieve100percentBranchCoverage9() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(5);
+            BigDecimal hourlyReducedRate = new BigDecimal(6);
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            Collections.addAll(normalPeriods,new Period(10,12),new Period(11,12), new Period(14,16));
+            Collections.addAll(reducedPeriods,new Period(9,11),new Period(8,13),new Period(10,14));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            Period periodStay = new Period(17,21);
+            BigDecimal cost = rate.calculate(periodStay);
+            assertEquals(new BigDecimal(11),cost);
+        } catch (IllegalArgumentException e) {
+            assertEquals("The normal rate cannot be less to the reduced rate", e.getMessage());
+        }
+    }
+
+    @Test
+    public void oachieve100percentBranchCoverage10() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(5);
+            BigDecimal hourlyReducedRate = new BigDecimal(2);
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            Collections.addAll(normalPeriods,new Period(10,12),new Period(11,12), new Period(14,16));
+            Collections.addAll(reducedPeriods,new Period(9,11),new Period(8,13),new Period(10,14));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            Period periodStay = new Period(17,21);
+            BigDecimal cost = rate.calculate(periodStay);
+            assertEquals(new BigDecimal(11),cost);
+        } catch (IllegalArgumentException e) {
+            assertEquals("The periods are not valid individually", e.getMessage());
+        }
+    }
+
+    @Test
+    public void oachieve100percentBranchCoverage11() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(5);
+            BigDecimal hourlyReducedRate = new BigDecimal(2);
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            Collections.addAll(normalPeriods,new Period(10,12),new Period(11,12), new Period(14,16));
+            Collections.addAll(reducedPeriods,new Period(9,11),new Period(8,13),new Period(10,14));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            Period periodStay = new Period(17,21);
+            BigDecimal cost = rate.calculate(periodStay);
+            assertEquals(new BigDecimal(11),cost);
+        } catch (IllegalArgumentException e) {
+            assertEquals("The periods are not valid individually", e.getMessage());
+        }
+    }
+
+    @Test
+    public void overlapsInSomePeriods() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(5);
+            BigDecimal hourlyReducedRate = new BigDecimal(2);
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            Collections.addAll(normalPeriods,new Period(10,12),new Period(11,12), new Period(14,16));
+            Collections.addAll(reducedPeriods,new Period(9,11),new Period(8,13),new Period(10,14));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            Period periodStay = new Period(17,21);
+            BigDecimal cost = rate.calculate(periodStay);
+            assertEquals(new BigDecimal(11),cost);
+        } catch (IllegalArgumentException e) {
+            assertEquals("The periods are not valid individually", e.getMessage());
+        }
+    }
+
+    @Test
+    public void overlaps24hours() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(5);
+            BigDecimal hourlyReducedRate = new BigDecimal(2);
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            Collections.addAll(normalPeriods,new Period(0,24));
+            Collections.addAll(reducedPeriods,new Period(0,1),new Period(2,8),new Period(9,10));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            //Period periodStay = new Period(17,21);
+            //BigDecimal cost = rate.calculate(periodStay);
+            //assertEquals(new BigDecimal(11),cost);
+        } catch (IllegalArgumentException e) {
+            assertEquals("The periods overlaps", e.getMessage());
+        }
+    }
+
+    @Test
+    public void reducedPeriodsIsNotValid() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(5);
+            BigDecimal hourlyReducedRate = new BigDecimal(2);
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            Collections.addAll(reducedPeriods,new Period(5,9),new Period(13,19),new Period(18,22));
+            Collections.addAll(normalPeriods,new Period(9,13));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            Period periodStay = new Period(17,18);
+            BigDecimal cost = rate.calculate(periodStay);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("The periods are not valid individually", e.getMessage());
+        }
+    }
+
+    @Test
+    public void normalPeriodsIsNotValid() throws IllegalArgumentException {
+        try {
+            CarParkKind kind = CarParkKind.STUDENT;
+            BigDecimal hourlyNormalRate = new BigDecimal(5);
+            BigDecimal hourlyReducedRate = new BigDecimal(2);
+            ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+            ArrayList<Period> normalPeriods = new ArrayList<Period>();
+            Collections.addAll(reducedPeriods,new Period(5,9),new Period(18,22));
+            Collections.addAll(normalPeriods,new Period(9,15),new Period(14,18));
+            Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+            Period periodStay = new Period(17,18);
+            BigDecimal cost = rate.calculate(periodStay);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("The periods are not valid individually", e.getMessage());
+        }
+    }
+
+
+    @Test
+    public void specificationUpdateManagement2() throws IllegalArgumentException {
+
+        CarParkKind kind = CarParkKind.MANAGEMENT;
+        BigDecimal hourlyNormalRate = new BigDecimal(5);
+        BigDecimal hourlyReducedRate = new BigDecimal(3);
+        ArrayList<Period> normalPeriods = new ArrayList<Period>();
+        ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+        Collections.addAll(normalPeriods,new Period(9,13), new Period(14,18));
+        Collections.addAll(reducedPeriods,new Period(7,9),new Period(13,14),new Period(18,22));
+        Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+        Period periodStay = new Period(7,9);
+        BigDecimal cost = rate.calculate(periodStay);
+        assertEquals(new BigDecimal(6),cost);
+    }
+
+    @Test
+    public void specificationUpdateStaff2() throws IllegalArgumentException {
+
+        CarParkKind kind = CarParkKind.STAFF;
+        BigDecimal hourlyNormalRate = new BigDecimal(5);
+        BigDecimal hourlyReducedRate = new BigDecimal(3);
+        ArrayList<Period> normalPeriods = new ArrayList<Period>();
+        ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+        Collections.addAll(normalPeriods,new Period(9,13), new Period(14,18));
+        Collections.addAll(reducedPeriods,new Period(7,9),new Period(13,14),new Period(18,22));
+        Rate rate = new Rate(kind,hourlyNormalRate,hourlyReducedRate,reducedPeriods,normalPeriods);
+        Period periodStay = new Period(9,10);
+        BigDecimal cost = rate.calculate(periodStay);
+        assertEquals(new BigDecimal(5),cost);
+    }
+
+
 
 }

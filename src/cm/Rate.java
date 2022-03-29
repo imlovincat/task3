@@ -111,6 +111,9 @@ public class Rate {
         else if (this.kind == CarParkKind.MANAGEMENT) {
             price = managementPrice(price);
         }
+        else if (this.kind == CarParkKind.STUDENT) {
+            price = studentPrice(price);
+        }
 
         return price;
     }
@@ -147,5 +150,17 @@ public class Rate {
         }
         return price;
     }
+
+    public BigDecimal studentPrice(BigDecimal price) {
+
+        //https://www.tutorialspoint.com/java/math/bigdecimal_subtract_mc.htm
+        MathContext mc = new MathContext(3); // 2 precision
+
+        if (price.compareTo(new BigDecimal(5.5)) > 0) {
+            return price.subtract(new BigDecimal(5.5)).multiply(new BigDecimal(0.75),mc).add(new BigDecimal(5.5));
+        }
+        return price;
+    }
+
 
 }

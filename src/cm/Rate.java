@@ -108,13 +108,13 @@ public class Rate {
         if (this.kind == CarParkKind.VISITOR) {
             price = visitorPrice(price);
         }
-        else if (this.kind == CarParkKind.MANAGEMENT) {
+        if (this.kind == CarParkKind.MANAGEMENT) {
             price = managementPrice(price);
         }
-        else if (this.kind == CarParkKind.STUDENT) {
+        if (this.kind == CarParkKind.STUDENT) {
             price = studentPrice(price);
         }
-        else if (this.kind == CarParkKind.STAFF) {
+        if (this.kind == CarParkKind.STAFF) {
             price = staffPrice(price);
         }
         return price;

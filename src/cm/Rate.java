@@ -153,7 +153,6 @@ public class Rate {
 
     public BigDecimal studentPrice(BigDecimal price) {
 
-        //https://www.tutorialspoint.com/java/math/bigdecimal_subtract_mc.htm
         MathContext mc = new MathContext(3); // 2 precision
 
         if (price.compareTo(new BigDecimal(5.5)) > 0) {
